@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -476,8 +477,14 @@ func exporterFile(mekanoData []MekanoDataStruct) {
 	// Establece el sheet activo al primero
 	f.SetActiveSheet(index)
 
+	dir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println(err)
+
+	}
+
 	// Guarda el archivo de Excel
-	if err := f.SaveAs(filepath.Join("C:\\APOLOSOFT\\MEKANO_REMOTO\\INTERFACES", "CONTABLE.xlsx")); err != nil {
+	if err := f.SaveAs(filepath.Join(dir, "CONTABLE.xlsx")); err != nil {
 		fmt.Println(err)
 	}
 }
